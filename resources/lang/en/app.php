@@ -12,9 +12,14 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'home' => 'Home',
+    'expense' => 'Expense Reports',
+    'myexpenses' => 'My Expense Reports',
+    'vacations' => 'Vacations',
+    'myvacations' => 'My vacations',
+    'requestvac' => 'Request a vacation',
+    'pendingvac' => 'Pending vacations',
+    'wallofsalt' => 'Wall of Salt',
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'logout' => 'Logout',
 
 ];

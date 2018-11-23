@@ -12,9 +12,13 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'logout' => 'Logout',
+    'home' => 'Accueil',
+    'expense' => 'Notes de frais',
+    'myexpenses' => 'Mes notes de frais',
+    'vacations' => 'Congés',
+    'myvacations' => 'Mes congés',
+    'requestvac' => 'Demander un congé',
+    'pendingvac' => 'Congés en attente',
+    'wallofsalt' => 'Mur du sel',
 
 ];
