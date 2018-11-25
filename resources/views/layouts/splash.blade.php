@@ -15,10 +15,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   </head>
   <body>
-    @include('layouts.navbar')
-    @yield('breadcrumb')
-    <div class="container mt-50">
       @yield('content')
-    </div>
   </body>
 </html>

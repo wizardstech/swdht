@@ -3,7 +3,6 @@
     &.dropdown-right { left: -41px; }
 }
 
-
 .mt-10{
     margin-top: 10px;
 }
@@ -34,4 +33,40 @@
 
 .mt-80{
     margin-top: 80px;
+}
+
+.login-bg{
+    background: url("/bg.png");
+}
+
+.p-10{
+    padding: 10px;
+}
+
+.p-20{
+    padding: 20px;
+}
+.p-30{
+    padding: 30px;
+}
+.p-40{
+    padding: 40px;
+}
+
+.avatar {
+    margin-top: -70px;
+    padding-bottom: 20px;
+}
+
+.avatar img {
+    height: 128px;
+    padding: 5px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+    box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+}
+
+.box {
+    margin-top: 5rem;
 }

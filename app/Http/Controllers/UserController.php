@@ -7,7 +7,8 @@ use \Auth;
 
 class UserController extends Controller
 {
-    public function profile(Request $request){
-        dump(Auth::user()->name);
+    public function profile(Request $request, $username){
+
+        return view('users.profile');
     }
 }

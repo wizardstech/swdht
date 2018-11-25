@@ -14,12 +14,12 @@ return [
     */
     'home' => 'Home',
     'expense' => 'Expense Reports',
-    'myexpenses' => 'My Expense Reports',
+    'myExpenses' => 'My Expense Reports',
     'vacations' => 'Vacations',
-    'myvacations' => 'My vacations',
-    'requestvac' => 'Request a vacation',
-    'pendingvac' => 'Pending vacations',
-    'wallofsalt' => 'Wall of Salt',
-
+    'myVacations' => 'My vacations',
+    'requestVacation' => 'Request a vacation',
+    'pendingVacation' => 'Pending vacations',
+    'wallOfSalt' => 'Wall of Salt',
+    'profile' => 'Profile',
 
 ];

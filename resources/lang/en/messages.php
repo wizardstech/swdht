@@ -14,4 +14,6 @@ return [
     */
 
     'welcome' => 'Welcome in Wizards Technologies',
+    'login-title' => 'Wizards Technologies',
+    'login' => 'Please login to proceed.',
 ];

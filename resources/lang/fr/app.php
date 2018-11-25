@@ -14,11 +14,12 @@ return [
     */
     'home' => 'Accueil',
     'expense' => 'Notes de frais',
-    'myexpenses' => 'Mes notes de frais',
+    'myExpenses' => 'Mes notes de frais',
     'vacations' => 'Congés',
-    'myvacations' => 'Mes congés',
-    'requestvac' => 'Demander un congé',
-    'pendingvac' => 'Congés en attente',
-    'wallofsalt' => 'Mur du sel',
+    'myVacations' => 'Mes congés',
+    'requestVacation' => 'Demander un congé',
+    'pendingVacation' => 'Congés en attente',
+    'wallOfSalt' => 'Mur du sel',
+    'profile' => 'Profil',
 
 ];

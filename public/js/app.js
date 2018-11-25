@@ -47452,7 +47452,7 @@ if (false) {
 /* 43 */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: ModuleBuildError: Module build failed: \n@if $bulmaswatch-import-font {\n   ^\n      Undefined variable: \"$bulmaswatch-import-font\".\n      in /home/louis/web/wizards/swdht/resources/sass/_overrides.scss (line 2, column 5)\n    at runLoaders (/home/louis/web/wizards/swdht/node_modules/webpack/lib/NormalModule.js:195:19)\n    at /home/louis/web/wizards/swdht/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /home/louis/web/wizards/swdht/node_modules/loader-runner/lib/LoaderRunner.js:230:18\n    at context.callback (/home/louis/web/wizards/swdht/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at Object.asyncSassJobQueue.push [as callback] (/home/louis/web/wizards/swdht/node_modules/sass-loader/lib/loader.js:55:13)\n    at Object.done [as callback] (/home/louis/web/wizards/swdht/node_modules/neo-async/async.js:8077:18)\n    at options.error (/home/louis/web/wizards/swdht/node_modules/node-sass/lib/index.js:294:32)");
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

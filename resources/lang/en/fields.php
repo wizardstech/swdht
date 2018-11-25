@@ -13,7 +13,11 @@ return [
     |
     */
 
-    'welcome' => 'Bienvenue sur Wizards Technologies',
-    'login-title' => 'Wizards Technologies',
-    'login' => 'Veuillez vous connecter.',
+    'email' => 'Email',
+    'password' => 'Password',
+    'rememberMe' => 'Remember Me',
+    'login' => 'Login',
+    'register' => 'Register',
+    'forgotPassword' => 'Forgot your password ?',
+    'username' => 'Username',
 ];
