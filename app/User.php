@@ -2,29 +2,41 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use \Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+
+class User extends Authenticatable implements HasMedia
 {
-    use Notifiable;
+	use SoftDeletes; 
+	use Notifiable; 
+	use HasRoles;
+	use HasMediaTrait;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+	protected $dates = [
+		'birthdate',
+		'email_verified_at'
+	];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+	protected $hidden = [
+		'password',
+		'remember_token'
+	];
+
+	protected $fillable = [
+		'username',
+		'firstname',
+		'lastname',
+		'birthdate',
+		'email',
+		'email_verified_at',
+		'password',
+		'remember_token'
+	];
+
 }
