@@ -88,6 +88,8 @@ class RegisterController extends Controller
 
         $user->assignRole('user');
 
+        $user->copyMedia('wizard-user.png')->toMediaCollection('user');
+
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
     }
