@@ -50,6 +50,20 @@
           @else
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-item navbar-link">
+              Notifications
+            </a>
+            <div class="navbar-dropdown dropdown-right">
+              @forelse(Auth::user()->notifications as $notification)
+              <a class="navbar-item" >
+                {{ $notification }}
+              </a>
+              @empty
+              <p> No notifications </p>
+              @endforelse              
+            </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-item navbar-link">
               {{ Auth::user()->username }}
             </a>
             <div class="navbar-dropdown dropdown-right">

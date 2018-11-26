@@ -14,6 +14,8 @@ class UserController extends Controller
 
         $self = $foundUser->id === Auth::id();
 
+        
+
         return view('users.profile',['user'=>$foundUser,'self'=>$self]);
     }
 }

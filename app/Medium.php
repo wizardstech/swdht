@@ -39,7 +39,6 @@ class Medium extends Eloquent
     {
 
       $this->addMediaCollection('user')->singleFile();
-
       $this->addMediaCollection('invoice');
 
     }

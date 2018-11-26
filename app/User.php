@@ -38,4 +38,5 @@ class User extends Authenticatable implements HasMedia
 		'password',
 		'remember_token'
 	];
+
 }
