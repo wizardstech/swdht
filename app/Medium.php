@@ -1,15 +1,10 @@
 <?php
 
-/**
- * Created by Reliese Model.
- * Date: Tue, 05 Jun 2018 13:53:53 +0000.
- */
-
 namespace App;
 
-use Reliese\Database\Eloquent\Model as Eloquent;
+use Reliese\Database\Eloquent\Model;
 
-class Medium extends Eloquent
+class Medium extends Model
 {
     protected $casts = [
         'model_id' => 'int',
