@@ -27,4 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the expense reports for the user.
+     */
+    public function expense_reports()
+    {
+        return $this->hasMany('App\ExpenseReport');
+    }
 }
