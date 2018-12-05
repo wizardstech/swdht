@@ -9,11 +9,21 @@
                     Déclarer une nouvelle note de frais
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                 @if (isset($expense_report))
                     {!! Form::model($expense_report, ['url'=>'save_expense_report']) !!}
                         {!! Form::hidden('expense_report_id', $expense_report->id) !!}
                 @else
-                    {!! Form::open(['url'=>'save_expense_report']) !!}
+                    {!! Form::open(['url'=>'save_expense_report', 'files' => true]) !!}
                 @endif
                     <table>
                     	<tr>
@@ -34,7 +44,17 @@
 	                    </tr>
                         <tr>
                             <td>{!! Form::label('document', 'Justificatif') !!}</td>
-                            <td>{!! Form::file('document') !!}</td>
+                            <td>
+                                @if(isset($expense_report->id) && $fileExists)
+                                    <a target="_blank" href="{{ url($pathToFile) }}">
+                                    <img style="width:50%" class="img" src="{{ url($pathToFile) }}">
+                                    </a>
+                                    {!! Form::file($expense_report,['url' => 'save_expense_report']) !!}
+                                    
+                                @else
+                                {!! Form::file('document') !!}
+                                @endif
+                            </td>
                         </tr>
 	                    <tr>
 	                    	<td colspan=2>{!! Form::submit('Valider') !!}</td>
@@ -47,4 +67,3 @@
     </div>
 </div>
 @endsection
-

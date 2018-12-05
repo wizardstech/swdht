@@ -29,6 +29,23 @@
 // date_expense (DATE)
 // (plus tard : une piece jointe pour le justif)
 
+Route::get('storage/documents/{filename}', function ($filename)
+{
+    $path = storage_path('app/documents/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -48,6 +65,8 @@ Route::get('/modify_expense_report/{id}', 'ExpenseReportsController@modify')->na
 
 Route::post('/save_expense_report', 'ExpenseReportsController@save')->name('save_expense_report');
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

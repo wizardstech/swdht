@@ -20,6 +20,7 @@ class CreateExpenseReports extends Migration
             $table->string('provider', 255);
             $table->text('details');
             $table->date('date_expense');
+            $table->string('url_image', 255)->nullable();
             $table->timestamps();
             //$table->foreign('user_id')->references('id')->on('users');
         });
