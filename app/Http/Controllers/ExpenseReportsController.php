@@ -44,7 +44,7 @@ class ExpenseReportsController extends Controller
             'amount' => 'required|numeric|digits_between:1,10',
             'details' => 'required',
             'provider' => 'required',
-            'document' => 'required_if:document|mimes:jpeg,jpg,png',
+            'document' => 'mimes:jpeg,jpg,png|max:500000',
             'date_expense' =>'required',
         ]);
 
@@ -70,7 +70,7 @@ class ExpenseReportsController extends Controller
         {
 
         }*/
-
+        
     	$expense_report->save();
 
     	return redirect('expense_reports')->with('status', 'Note de frais enregistrée !');
