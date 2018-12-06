@@ -19,9 +19,9 @@
                         </div>
                     @endif
 
-                @if (isset($expense_report))
-                    {!! Form::model($expense_report, ['url'=>'save_expense_report']) !!}
-                        {!! Form::hidden('expense_report_id', $expense_report->id) !!}
+                @if (isset($expenseReport))
+                    {!! Form::model($expenseReport, ['url'=>'save_expense_report', 'files' => true]) !!}
+                        {!! Form::hidden('expense_report_id', $expenseReport->id) !!}
                 @else
                     {!! Form::open(['url'=>'save_expense_report', 'files' => true]) !!}
                 @endif
@@ -45,11 +45,11 @@
                         <tr>
                             <td>{!! Form::label('document', 'Justificatif') !!}</td>
                             <td>
-                                @if(isset($expense_report->id) && $fileExists)
+                                @if(isset($expenseReport->id) && $fileExists)
                                     <a target="_blank" href="{{ url($pathToFile) }}">
                                     <img style="width:50%" class="img" src="{{ url($pathToFile) }}">
                                     </a>
-                                    {!! Form::file($expense_report,['url' => 'save_expense_report']) !!}
+                                    {!! Form::file('document') !!}
                                     
                                 @else
                                 {!! Form::file('document') !!}

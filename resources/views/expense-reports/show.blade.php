@@ -6,25 +6,25 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Détails de la note de frais #{{ $expense_report->id }}
+                    Détails de la note de frais #{{ $expenseReport->id }}
                 </div>
                 <div class="card-body">
                     <table border=1>
                         <tr>
                             <td>date</td>
-                            <td>{{ $expense_report->date_expense }}</td>
+                            <td>{{ $expenseReport->date_expense }}</td>
                         </tr>
                         <tr>
                             <td>montant</td>
-                            <td>{{ $expense_report->amount }}</td>
+                            <td>{{ $expenseReport->amount }}</td>
                         </tr>
                         <tr>
                             <td>établissement</td>
-                            <td>{{ $expense_report->provider }}</td>
+                            <td>{{ $expenseReport->provider }}</td>
                         </tr>
                         <tr>
                             <td>détails</td>
-                            <td>{{ $expense_report->details }}</td>
+                            <td>{{ $expenseReport->details }}</td>
                         </tr>
                 </table>
                 </div>

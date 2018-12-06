@@ -12,29 +12,25 @@ class ExpenseReportsController extends Controller
 {
     public function index()
     {
-		// Ici se trouvera le code qui récupèrera la liste des users
-		// la variable $users contient une liste d'articles
         if(Auth::user()->role == 'user'){
-            $expense_reports = ExpenseReport::where('user_id','=',Auth::id())->get();
+            $expenseReports = ExpenseReport::where('user_id','=',Auth::id())->get();
         }elseif(Auth::user()->role == 'admin'){
-            $expense_reports = ExpenseReport::all();
+            $expenseReports = ExpenseReport::all();
         }
-        
-    	//var_dump($users)
 
-	    return view('expense_reports', ['expense_reports' => $expense_reports]); // La vue users aura accès à la liste sous le nom listeUsers
+	    return view('expense-reports/index', ['expenseReports' => $expenseReports]);
     }
 
     public function show(Request $request)
     {
-    	$expense_report = ExpenseReport::findOrFail($request->id);
+    	$expenseReport = ExpenseReport::findOrFail($request->id);
 
-    	return view('show_expense_report', ['expense_report' => $expense_report]);
+    	return view('expense-reports/show', ['expenseReport' => $expenseReport]);
     }
 
     public function new()
     {
-    	return view('form_expense_report');
+    	return view('expense-reports/form');
     }
 
     public function save(Request $request)
@@ -48,55 +44,55 @@ class ExpenseReportsController extends Controller
             'date_expense' =>'required',
         ]);
 
-    	// gestion de l'update
-    	if (isset($request->expense_report_id))
-    		$expense_report = ExpenseReport::findOrFail($request->expense_report_id);
-    	else
-	    	$expense_report = new ExpenseReport;
+        if (isset($request->expense_report_id))
+          $expenseReport = ExpenseReport::findOrFail($request->expense_report_id);
+      else
+          $expenseReport = new ExpenseReport;
 
-    	$expense_report->amount = $request->input('amount');
-    	$expense_report->provider = $request->input('provider');
-    	$expense_report->date_expense = $request->input('date_expense');
-    	$expense_report->details = $request->input('details');
-        if(!isset($request->expense_report_id))
-    	   $expense_report->user_id = Auth::id();
-    	if($request->file('document'))
-    	 {
-            // Sauvegarder l'document sur le serveur
-            // Donner le chemin de l'document à l'objet $expense_report instancié
-        $expense_report->url_image = $request->file('document')->store('documents');
-        }
-        /*else($expense_report->file('document'))
+      $expenseReport->amount = $request->input('amount');
+      $expenseReport->provider = $request->input('provider');
+      $expenseReport->date_expense = $request->input('date_expense');
+      $expenseReport->details = $request->input('details');
+
+      if(!isset($request->expense_report_id))
+        $expenseReport->user_id = Auth::id();
+
+    if($request->file('document'))
+    { 
+        if (Storage::disk('local')->exists($expenseReport->url_image)) 
         {
-
-        }*/
-        
-    	$expense_report->save();
-
-    	return redirect('expense_reports')->with('status', 'Note de frais enregistrée !');
-    }
-
-    public function modify(Request $request)
-    {
-
-    	$expense_report = ExpenseReport::findOrFail($request->id);
-    	$fileExists = Storage::disk('local')->exists($expense_report->url_image);
-    	if($fileExists){
-    		$pathToFile = Storage::disk('local')->url($expense_report->url_image); 
-    	}else{
-            $pathToFile = false;
+            Storage::delete($expenseReport->url_image);
         }
+        $expenseReport->url_image = $request->file('document')->store('documents'); 
 
-    	return view('form_expense_report', ['expense_report' => $expense_report,'fileExists'=>$fileExists,'pathToFile'=>$pathToFile]);
     }
 
-	public function delete(Request $request)
-    {
-    	$expense_report = ExpenseReport::findOrFail($request->id);
+    $expenseReport->save();
 
-    	$expense_report->delete();
+    return redirect('expense_reports')->with('status', 'Note de frais enregistrée !');
+}
 
-    	return redirect('expense_reports')->with('status', 'Note de frais supprimée !');
-    }
+public function modify(Request $request)
+{
+
+   $expenseReport = ExpenseReport::findOrFail($request->id);
+   $fileExists = Storage::disk('local')->exists($expenseReport->url_image);
+   if($fileExists){
+      $pathToFile = Storage::disk('local')->url($expenseReport->url_image); 
+  }else{
+    $pathToFile = false;
+}
+
+return view('expense-reports/form', ['expenseReport' => $expenseReport,'fileExists'=>$fileExists,'pathToFile'=>$pathToFile]);
+}
+
+public function delete(Request $request)
+{
+   $expenseReport = ExpenseReport::findOrFail($request->id);
+
+   $expenseReport->delete();
+
+   return redirect('expense_reports')->with('status', 'Note de frais supprimée !');
+}
 
 }

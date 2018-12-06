@@ -19,15 +19,16 @@
                             <th>date</th>
                             <th colspan=3>actions</th>
                         </tr>
-                        @foreach ($expense_reports as $expense_report)
+                        @foreach ($expenseReports as $expenseReport)
                         <tr>
-                            <td>{{ $expense_report->amount }}</td>
-                            <td>{{ $expense_report->provider}}</td>
-                            <td>{{ $expense_report->user->name }}</td>
-                            <td>{{ $expense_report->date_expense}}</td>
-                            <td><a href='/expense_report/{{ $expense_report->id }}'>view</a></td>
-                            <td><a href='/modify_expense_report/{{ $expense_report->id }}'>edit</a></td>
-                            <td><a onclick='return confirm("Voulez-vous vraiment supprimer DEFINITIVEMENT cette note de frais ?")' href='/delete_expense_report/{{ $expense_report->id }}'>delete</a></td>
+                            <td>{{ $expenseReport->amount }}</td>
+                            <td>{{ $expenseReport->provider}}</td>
+                            <td>{{ $expenseReport->user->name }}</td>
+                            <td>{{ $expenseReport->date_expense}}</td>
+                            <td><a href='{{ route('show_expense_report', ['id' => $expenseReport->id]) }}'>view</a></td>
+                            <td><a href='{{ route('modify_expense_report', ['id' => $expenseReport->id]) }}'>edit</a></td>
+                            <td><a onclick='return confirm("Voulez-vous vraiment supprimer DEFINITIVEMENT cette note de frais ?")' 
+                                href='{{ route('delete_expense_report', ['id' => $expenseReport->id]) }}'>delete</a></td>
                         </tr>
                         @endforeach
                 </table>
