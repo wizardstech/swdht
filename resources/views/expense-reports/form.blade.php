@@ -19,11 +19,11 @@
                         </div>
                     @endif
 
-                @if (isset($users))
-                    {!! Form::model($users, ['url'=>'save_users']) !!}
-                        {!! Form::hidden('users_id', $users->id) !!}
+                @if (isset($expenseReport))
+                    {!! Form::model($expenseReport, ['url'=>'save_expense_report']) !!}
+                        {!! Form::hidden('expense_report_id', $expenseReport->id) !!}
                 @else
-                    {!! Form::open(['url'=>'save_users']) !!}
+                    {!! Form::open(['url'=>'save_expense_report']) !!}
                 @endif
                     <table>
                             <div class="form-group">
