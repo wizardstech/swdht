@@ -40,7 +40,7 @@ class ExpenseReportsController extends Controller
             'amount' => 'required|numeric|digits_between:1,10',
             'details' => 'required',
             'provider' => 'required',
-            'document' => 'mimes:jpeg,jpg,png|max:500000',
+            'document' => 'mimes:jpeg,jpg,png',
             'date_expense' =>'required',
         ]);
 

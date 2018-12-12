@@ -27,15 +27,13 @@
                 @endif
                     <table>
                             <div class="form-group">
-                                {{ Form::numberInput('amount', null, ['step' => '0.01'])}}
+                                {{ Form::numberInput('amount', null, ['step' => '0.01', 'placeholder' => 'Montant en euro'])}}
                             </div>    
                     <div class="form-group">
-                        <label for="provider">Etablissement</label>
-                        <input type="text" name="provider" value="" class="form-control">
+                        {{ Form::simpleInput('provider', null, ['placeholder' => 'Etablissement'])}}
                     </div>
                     <div class="form-group">
-                         <label for="date_expense">Date</label>
-                        <input type="date" name="date_expense" value="" class="form-control">
+                        {{ Form::dateInput('date_expense')}}
                     </div>
                     <div class="form-group">
                         {{ Form::textAreaInput('details', null, ['placeholder' => 'Indiquez la nature de la dépense, les personne concernées, ou tout détail concernant la note de frais'])}}

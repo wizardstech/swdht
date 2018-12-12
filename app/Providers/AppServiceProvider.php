@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
 
         \Form::component('numberInput', 'components.form.number-input', ['name', 'value', 'attributes']);
 
-        //\Form::component('dateInput', 'components.form.date-input', ['name', 'value', 'attributes']); 
+        \Form::component('dateInput', 'components.form.date-input', ['name', 'value', 'attributes']); 
         
         \Form::component('textAreaInput', 'components.form.textArea-input', ['name', 'value', 'attributes']);        
     }
