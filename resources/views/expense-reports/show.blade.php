@@ -27,11 +27,7 @@
                           <td>{{ $expenseReport->provider }}</td>
                           <td>{{ $expenseReport->details }}</td>
                         </tr>
-                        <tr>
-                                                                <a target="_blank" href="{{ url($pathToFile) }}">
-                                    {{ basename($pathToFile) }}<!-- img style="width:50%" class="img" src="{{ url($pathToFile) }}"-->
-                                    </a>
-                        </tr>
+
                       </tbody>
                     </table>
                 </div>

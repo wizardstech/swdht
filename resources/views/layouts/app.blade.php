@@ -29,10 +29,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="{{ url('/home')}}">Acceuil <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Features</a>
       <a class="nav-item nav-link" href="{{ url('/expense_reports')}}">Notes de frais</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
-      <a class="nav-item nav-link disabled" href="#">Disabled</a>
        <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -52,7 +49,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/expense_reports')}}">Notes de frais</a>
+                                  @if(Auth::user()->role == 'admin')
+                                    <a class="dropdown-item" href="{{ url('/users')}}">Utilisateurs</a>
+                                  @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

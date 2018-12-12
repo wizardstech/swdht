@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Déclaration d'une nouvelle note de frais
+                    Modification de l'utilisateur {{ $users->name }}
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -26,20 +26,24 @@
                     {!! Form::open(['url'=>'save_users']) !!}
                 @endif
                     <table>
+                    <div class="form-group">
+                            {{ Form::simpleInput('first_name',null,['placeholder'=>'toto']) }}
                             <div class="form-group">
                                 {{ Form::numberInput('amount', null, ['step' => '0.01'])}}
                             </div>    
-                    <div class="form-group">
-                        <label for="provider">Etablissement</label>
-                        <input type="text" name="provider" value="" class="form-control">
                     </div>
-                    <div class="form-group">
-                         <label for="date_expense">Date</label>
-                        <input type="date" name="date_expense" value="" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        {{ Form::textAreaInput('details', null, ['placeholder' => 'Indiquez la nature de la dépense, les personne concernées, ou tout détail concernant la note de frais'])}}
-                    </div>
+                        <tr>
+                            <td>{!! Form::label('provider', 'Etablissement') !!}</td>
+                            <td>{!! Form::text('provider') !!}</td>
+                        </tr>
+                        <tr>
+                            <td>{!! Form::label('date_expense', 'Date') !!}</td>
+                            <td class="form-control">{!! Form::date('date_expense') !!}</td>
+                        </tr>
+                        <tr>
+                            <td>{!! Form::label('details', 'Description') !!}</td>
+                            <td >{!! Form::textarea('details', null,['placeholder' => 'Indiquez la nature de la dépense, les personne concernées, ou tout détail concernant la note de frais']) !!}</td>
+                        </tr>
                         <tr>
                             <td>{!! Form::label('document', 'Justificatif') !!}</td>
                             <td>

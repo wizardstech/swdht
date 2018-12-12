@@ -36,6 +36,16 @@ Route::get('/modify_expense_report/{id}', 'ExpenseReportsController@modify')->na
 
 Route::post('/save_expense_report', 'ExpenseReportsController@save')->name('save_expense_report');
 
+Route::get('/users', 'usersController@index')->name('users');
+
+Route::get('/users/{id}', 'usersController@show')->name('show_users');
+
+Route::get('/save_users', 'usersController@save')->name('save_users');
+
+Route::get('/modify_users/{id}', 'usersController@modify')->name('modify_users');
+
+Route::get('/delete_users/{id}', 'usersController@delete')->name('delete_users');
+
 
 Auth::routes();
 
