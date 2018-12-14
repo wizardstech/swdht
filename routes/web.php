@@ -26,7 +26,7 @@ Route::get('/', function () {
 });*/
 Route::get('/expense_reports', 'ExpenseReportsController@index')->name('expense_reports');
 
-Route::get('/expense_report/{id}', 'ExpenseReportsController@show')->name('show_expense_report');
+Route::get('/expense_report/{id}', 'ExpenseReportsController@show')->name('show_expense_report')->middleware('admin');
 
 Route::get('/delete_expense_report/{id}', 'ExpenseReportsController@delete')->name('delete_expense_report');
 
@@ -36,13 +36,13 @@ Route::get('/modify_expense_report/{id}', 'ExpenseReportsController@modify')->na
 
 Route::post('/save_expense_report', 'ExpenseReportsController@save')->name('save_expense_report');
 
-Route::get('/users', 'usersController@index')->name('users');
+Route::get('/users', 'usersController@index')->name('users')->middleware('admin');
 
-Route::get('/users/{id}', 'usersController@show')->name('show_users');
+Route::get('/users/{id}', 'usersController@show')->name('show_users')->middleware('admin');
 
-Route::get('/save_users', 'usersController@save')->name('save_users');
+Route::post('/save_users', 'usersController@save')->name('save_users');
 
-Route::get('/modify_users/{id}', 'usersController@modify')->name('modify_users');
+Route::get('/modify_users/{id}', 'usersController@modify')->name('modify_users')->middleware('admin');
 
 Route::get('/delete_users/{id}', 'usersController@delete')->name('delete_users');
 

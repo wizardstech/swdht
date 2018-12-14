@@ -40,7 +40,7 @@ class ExpenseReportsController extends Controller
             'amount' => 'required|numeric|digits_between:1,10',
             'details' => 'required',
             'provider' => 'required',
-            'document' => 'mimes:jpeg,jpg,png',
+            //'document' => 'mimes:jpeg,jpg,png',
             'date_expense' =>'required',
         ]);
 
@@ -74,7 +74,9 @@ class ExpenseReportsController extends Controller
 
 public function modify(Request $request)
 {
-
+  if(Auth::id() !== $request->id){
+      redirect('home');
+  }
    $expenseReport = ExpenseReport::findOrFail($request->id);
    $fileExists = Storage::disk('local')->exists($expenseReport->url_image);
    if($fileExists){
@@ -88,6 +90,9 @@ return view('expense-reports/form', ['expenseReport' => $expenseReport,'fileExis
 
 public function delete(Request $request)
 {
+  if(Auth::id() !== $request->id){
+      redirect('home');
+  }
    $expenseReport = ExpenseReport::findOrFail($request->id);
 
    $expenseReport->delete();

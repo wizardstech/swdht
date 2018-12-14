@@ -27,37 +27,11 @@
                 @endif
                     <table>
                     <div class="form-group">
-                            {{ Form::simpleInput('first_name',null,['placeholder'=>'toto']) }}
+                            {{ Form::simpleInput('name',null,['placeholder'=>'toto']) }}
                             <div class="form-group">
-                                {{ Form::numberInput('amount', null, ['step' => '0.01'])}}
+                                {{ Form::simpleInput('email', null, ['placeholder' => 'exemple@test.essaie'])}}
                             </div>    
                     </div>
-                        <tr>
-                            <td>{!! Form::label('provider', 'Etablissement') !!}</td>
-                            <td>{!! Form::text('provider') !!}</td>
-                        </tr>
-                        <tr>
-                            <td>{!! Form::label('date_expense', 'Date') !!}</td>
-                            <td class="form-control">{!! Form::date('date_expense') !!}</td>
-                        </tr>
-                        <tr>
-                            <td>{!! Form::label('details', 'Description') !!}</td>
-                            <td >{!! Form::textarea('details', null,['placeholder' => 'Indiquez la nature de la dépense, les personne concernées, ou tout détail concernant la note de frais']) !!}</td>
-                        </tr>
-                        <tr>
-                            <td>{!! Form::label('document', 'Justificatif') !!}</td>
-                            <td>
-                                @if(isset($expenseReport->id) && $fileExists)
-                                    <a target="_blank" href="{{ url($pathToFile) }}">
-                                    {{ basename($pathToFile) }}<!-- img style="width:50%" class="img" src="{{ url($pathToFile) }}"-->
-                                    </a>
-                                    {!! Form::file('document') !!}
-                                    
-                                @else
-                                {!! Form::file('document') !!}
-                                @endif
-                            </td>
-                        </tr>
                       <tr>
                         <td colspan=2>{!! Form::submit('Valider') !!}</td>
                       </tr>

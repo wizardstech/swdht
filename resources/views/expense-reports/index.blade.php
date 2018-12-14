@@ -14,8 +14,8 @@
                     <table class="table">
                       <thead>
                         <tr>
-                            <th>Amount</th>
-                            <th>Provider</th>
+                            <th>Montant</th>
+                            <th>Etablissement</th>
                             <th>Personne</th>
                             <th>Date</th>
                             <th colspan=3>Actions</th>
