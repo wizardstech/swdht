@@ -61,6 +61,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .right{
+                right: 10px;
+            }
         </style>
     </head>
     <body>
