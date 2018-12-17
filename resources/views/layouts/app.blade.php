@@ -21,6 +21,7 @@
                     <img src="{{asset('wizards.png')}}" height="30" class="d-inline-block align-top" alt="">
                     Wizards Technologies
                 </a>
+                @if(!is_null(Auth::user()))
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link" href="{{ url('/expense_reports')}}">Notes de frais</a>
@@ -46,6 +47,7 @@
                         </li>
                     </div>
                 </div>
+                @endif
             </nav>
             <main class="py-4">
                 @yield('content')

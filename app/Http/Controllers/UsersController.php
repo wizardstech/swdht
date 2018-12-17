@@ -82,4 +82,9 @@ class usersController extends Controller
    return redirect('users')->with('status', 'Utilisateur supprimer');
 }
 
+  public function new()
+  {
+    return view('users/new');
+  }
+
 }

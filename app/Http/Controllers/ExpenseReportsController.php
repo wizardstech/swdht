@@ -49,13 +49,14 @@ class ExpenseReportsController extends Controller
       else
           $expenseReport = new ExpenseReport;
 
+      if(!isset($request->expense_report_id))
+        $expenseReport->user_id = Auth::id();
+
       $expenseReport->amount = $request->input('amount');
       $expenseReport->provider = $request->input('provider');
       $expenseReport->date_expense = $request->input('date_expense');
       $expenseReport->details = $request->input('details');
 
-      if(!isset($request->expense_report_id))
-        $expenseReport->user_id = Auth::id();
 
     if($request->file('document'))
     { 
@@ -64,8 +65,9 @@ class ExpenseReportsController extends Controller
             Storage::delete($expenseReport->url_image);
         }
         $expenseReport->url_image = $request->file('document')->store('documents'); 
-
     }
+
+
 
     $expenseReport->save();
 
