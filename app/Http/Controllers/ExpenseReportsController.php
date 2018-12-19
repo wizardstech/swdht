@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use DB;
 
 class ExpenseReportsController extends Controller
 {
@@ -16,6 +17,7 @@ class ExpenseReportsController extends Controller
             $expenseReports = ExpenseReport::where('user_id','=',Auth::id())->get();
         }elseif(Auth::user()->role == 'admin'){
             $expenseReports = ExpenseReport::all();
+            $expenseReports = DB::table('expense_reports')->paginate(10);
         }
 
 	    return view('expense-reports/index', ['expenseReports' => $expenseReports]);
