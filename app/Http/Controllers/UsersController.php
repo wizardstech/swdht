@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use DB;
 
 class usersController extends Controller
 {
     public function index()
     {
     	$users = User::all();
+      $users = DB::table('users')->simplePaginate(5);
 		// Ici se trouvera le code qui récupèrera la liste des users
 		// la variable $users contient une liste d'articles
 	    return view('users/index', ['users' => $users]); // La vue users aura accès à la liste sous le nom listeUsers

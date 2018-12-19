@@ -57,14 +57,15 @@ class ExpenseReportsController extends Controller
       $expenseReport->date_expense = $request->input('date_expense');
       $expenseReport->details = $request->input('details');
 
-
     if($request->file('document'))
     { 
         if (Storage::disk('local')->exists($expenseReport->url_image)) 
         {
             Storage::delete($expenseReport->url_image);
         }
-        $expenseReport->url_image = $request->file('document')->store('documents'); 
+        $expenseReport->url_image = $request->file('document')->store('documents');
+
+        dd('success'); 
     }
 
 
