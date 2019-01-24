@@ -13,7 +13,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Form::component('simpleInput', 'components.form.simple-input', ['name', 'value', 'attributes']);
+
+        \Form::component('numberInput', 'components.form.number-input', ['name', 'value', 'attributes']);
+
+        \Form::component('dateInput', 'components.form.date-input', ['name', 'value', 'attributes']); 
+        
+        \Form::component('textAreaInput', 'components.form.textArea-input', ['name', 'value', 'attributes']);        
     }
 
     /**
