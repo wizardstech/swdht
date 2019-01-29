@@ -1,0 +1,21 @@
+.card-body
+{
+	background-color: #FFFFFF;
+	border : 1px solid #DFDFDF;
+	border-radius : 2px;
+}
+
+td
+{
+	word-break: break-word;
+}
+
+h1
+{	
+	font-size: 170%; 
+	background-color: #F7F7F7;
+}
+
+.hidden{
+	display:none;
+}

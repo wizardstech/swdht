@@ -17,15 +17,14 @@ class CreateExpenseReports extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->float('amount', 10, 2);
+            $table->date('date_expense');
             $table->string('provider', 255);
             $table->text('details');
-            $table->date('date_expense');
-            $table->string('url_image', 255)->nullable();
+            $table->text('state');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id', 'document_id')->references('id', 'id')->on('users', 'documents');
         });
     }
-
     /**
      * Reverse the migrations.
      *

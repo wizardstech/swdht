@@ -26,7 +26,7 @@ Route::get('/', function () {
 });*/
 Route::get('/expense_reports', 'ExpenseReportsController@index')->name('expense_reports');
 
-Route::get('/expense_report/{id}', 'ExpenseReportsController@show')->name('show_expense_report')->middleware('admin');
+Route::get('/expense_report/{id}', 'ExpenseReportsController@show')->name('show_expense_report');
 
 Route::get('/delete_expense_report/{id}', 'ExpenseReportsController@delete')->name('delete_expense_report');
 
@@ -35,6 +35,8 @@ Route::get('/new_expense_report', 'ExpenseReportsController@new')->name('new_exp
 Route::get('/modify_expense_report/{id}', 'ExpenseReportsController@modify')->name('modify_expense_report');
 
 Route::post('/save_expense_report', 'ExpenseReportsController@save')->name('save_expense_report');
+
+Route::get('/open_supporting_documents', 'ExpenseReportsController@open_doc')->name('open_supporting_documents');
 
 Route::get('/users', 'UsersController@index')->name('users')->middleware('admin');
 

@@ -1,65 +1,131 @@
+
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    Déclaration d'une nouvelle note de frais
-                </div>
-                <div class="card-body">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
 
-                @if (isset($expenseReport))
-                    {!! Form::model($expenseReport, ['url'=>'save_expense_report']) !!}
-                        {!! Form::hidden('expense_report_id', $expenseReport->id) !!}
-                @else
-                    {!! Form::open(['url'=>'save_expense_report']) !!}
-                @endif
-                    <table>
-                            <div class="form-group">
-                                {{ Form::numberInput('amount', null, ['step' => '0.01', 'placeholder' => 'Montant en euro'])}}
-                            </div>    
-                    <div class="form-group">
-                        {{ Form::simpleInput('provider', null, ['placeholder' => 'Etablissement'])}}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::dateInput('date_expense')}}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::textAreaInput('details', null, ['placeholder' => 'Indiquez la nature de la dépense, les personne concernées, ou tout détail concernant la note de frais'])}}
-                    </div>
-                        <tr>
-                            <td>{!! Form::label('document', 'Justificatif') !!}</td>
-                            <td>
-                                @if(isset($expenseReport->id) && $fileExists)
-                                    <a target="_blank" href="{{ url($pathToFile) }}">
-                                    {{ basename($pathToFile) }}<!-- img style="width:50%" class="img" src="{{ url($pathToFile) }}"-->
-                                    </a>
-                                    {!! Form::file('document') !!}
-                                    
-                                @else
-                                {!! Form::file('document') !!}
-                                @endif
-                            </td>
-                        </tr>
-                      <tr>
-                        <td colspan=2>{!! Form::submit('Valider') !!}</td>
-                      </tr>
-                    </table>
-                    {!! Form::close() !!}
+<section class="row justify-content-center">
+	<form method="POST" action="/save_expense_report" enctype="multipart/form-data" class="row col-md-5">
+
+		<h1 class="col-sm-12"> 
+			@if (isset($expenseReport))
+                {!! Form::model($expenseReport, ['url'=>'save_expense_report', 'files' => true]) !!}
+                {!! Form::hidden('expense_report_id', $expenseReport->id) !!}
+				Edition de la note de frais              
+            @else
+                {!! Form::open(['url'=>'save_expense_report', 'files' => true]) !!}
+                Déclaration d'une nouvelle note de frais
+            @endif
+        </h1>
+
+		<div class="card-body row">
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            @endif
+
+			<div class="form-group col-sm-6">
+				{{ Form::numberInput('amount', null, ['step' => '0.01', 'placeholder' => 'Montant en euro'])}}
+			</div>
+
+			<div class="form-group col-sm-6">
+				{{ Form::dateInput('date_expense')}}
+			</div>
+
+			<div class="form-group col-sm-12">
+				{{ Form::simpleInput('provider', null, ['placeholder' => 'Etablissement'])}}
+			</div>
+
+			<div class="form-group col-sm-12">
+				{{ Form::textAreaInput('details', null, ['rows' => 6, 'placeholder' => 'Indiquez la nature de la dépense, les personne concernées, ou tout détail concernant la note de frais'])}}
+			</div>
+
+			<label id="Justificatif_label" class="form-group col-sm-12"> Justificatif </label>
+			<ul id="liste" >
+				@if(isset($expenseReport->id) && sizeof($documents) !== 0)
+					@foreach($documents as $key => $document)
+			            <li class="form-group col-sm-12" style='padding: 0px'>
+				            <a target="_blank" href='{{ route('open_supporting_documents',['document' => $document -> document]) }}' > {{ $document -> document_name}} </a>
+				            <button type="button" id="button_{{$key}}" onclick="deleteDocument()" class="btn btn-danger btn-sm" style="float:right"> Delete </button>
+				            <br>
+				            <img style="width:15%" class="img" src="{{ '/storage/'.$document->document }}">
+				        </li>	
+					@endforeach	
+				@endif
+			</ul>
+				<div class="form-group col-sm-12" id="input-document">
+					<input type="file" id="file_0" name="file_0" accept="image/*">
+				</div>
+			<div class="form-group col-sm-12 justify-content-end">
+				<button type="submit" id="form-submit" class="btn btn-success btn-lg" style="float:right"> Valider </button>
+			</div>
+		</div>
+	</form>
+</section>
+
 @endsection
+
+<script type="text/javascript">
+
+window.onload = function()
+{
+	// initialisation
+	var inputElement = document.getElementById("file_0");
+	inputElement.addEventListener("change", handleFiles, false);
+
+	function handleFiles(e)	
+	{
+		var temp = document.getElementsByTagName("template")[0];
+		var clone = temp.content.cloneNode(true);
+		clone.querySelector('p').innerHTML = e.target.files[0].name;
+
+        var reader  = new FileReader();
+        reader.onload = function(e) 
+        {
+			clone.querySelector('img').src = e.target.result;
+            inputElement.className = "hidden";
+            clone.querySelector('li').appendChild(inputElement);
+
+        	clone.querySelector('button').addEventListener('click', function (event) {
+				event.target.parentElement.remove();
+			});
+
+            document.getElementById("liste").appendChild(clone);
+
+            // ajoute un nouvel input
+			var temp2 = document.getElementsByTagName("template")[1];
+			var clone2 = temp2.content.cloneNode(true);
+			inputElement = clone2.querySelector('input');
+
+	        document.getElementById("input-document").appendChild(inputElement);
+	        inputElement.addEventListener("change", handleFiles, false);
+        }
+	    reader.readAsDataURL(e.target.files[0]);
+	}
+	// Bouton delete à finir
+	// function deleteDocument()
+	// {
+	// 	button.addEventListener('click', function (event) 
+	// 	{
+	// 		event.target.parentElement.remove();
+	// 	});
+	// }
+}
+</script>
+
+<template>
+	<li>
+		<p style="display: inline;"></p>
+		<button class="btn btn-danger btn-sm" style="float: right;">Delete</button>
+		<br>
+		<img src="" style="width: 15%">
+	</li>
+</template>
+<template>
+	<input type="file" name="file" accept="image/*">
+</template>

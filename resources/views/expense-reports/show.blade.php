@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 
 @section('content')
 <div class="container">
@@ -12,22 +12,28 @@
                    <table class="table">
                       <thead>
                         <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Date</th>
-                          <th scope="col">Montant</th>
-                          <th scope="col">Etablissement</th>
-                          <th scope="col">Details</th>
+                          
+                          <!-- <th scope="col">#</th> -->
+                          <th style="width: 5%" scope="col">Montant</th>
+                          <th style="width: 20%" scope="col">Date</th>
+                          <th style="width: 20%" scope="col">Etablissement</th>
+                          <th style="width: 35%" scope="col">Details</th>
+                          <th style="width: 20%" scope="col">File</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <th scope="row">{{ $expenseReport->id }}</th>
-                          <td>{{ $expenseReport->date_expense }}</td>
+                          <!-- <th scope="rowgroup">{{ $expenseReport->id }}</th> -->
                           <td>{{ $expenseReport->amount }}</td>
+                          <td>{{ $expenseReport->date_expense }}</td>
                           <td>{{ $expenseReport->provider }}</td>
                           <td>{{ $expenseReport->details }}</td>
+                          <td>
+                              @foreach ($documents as $document)
+                                <a target="_blank" href='{{ route('open_supporting_documents',['document' => $document -> document]) }}'> {{ $document -> document_name}} <br></a>
+                              @endforeach
+                          </td>
                         </tr>
-
                       </tbody>
                     </table>
                 </div>
@@ -37,4 +43,3 @@
     </div>
 </div>
 @endsection
-
