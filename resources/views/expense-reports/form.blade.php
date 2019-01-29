@@ -46,12 +46,12 @@
 			</div>
 
 			<label id="Justificatif_label" class="form-group col-sm-12"> Justificatif </label>
-			<ul id="liste" >
+			<ul class="form-group col-sm-12" id="liste">
 				@if(isset($expenseReport->id) && sizeof($documents) !== 0)
 					@foreach($documents as $key => $document)
 			            <li class="form-group col-sm-12" style='padding: 0px'>
 				            <a target="_blank" href='{{ route('open_supporting_documents',['document' => $document -> document]) }}' > {{ $document -> document_name}} </a>
-				            <button type="button" id="button_{{$key}}" onclick="deleteDocument()" class="btn btn-danger btn-sm" style="float:right"> Delete </button>
+				            <button type="button" id="button_{{$key}}" value="{{ $document -> id}}" onclick="deleteDocument(event)" class="btn btn-danger btn-sm" style="float:right"> Delete </button>
 				            <br>
 				            <img style="width:15%" class="img" src="{{ '/storage/'.$document->document }}">
 				        </li>	
@@ -75,6 +75,7 @@
 window.onload = function()
 {
 	// initialisation
+	var compteur = 1;
 	var inputElement = document.getElementById("file_0");
 	inputElement.addEventListener("change", handleFiles, false);
 
@@ -101,21 +102,32 @@ window.onload = function()
 			var temp2 = document.getElementsByTagName("template")[1];
 			var clone2 = temp2.content.cloneNode(true);
 			inputElement = clone2.querySelector('input');
+			inputElement.name+= compteur;
+			compteur++;
 
 	        document.getElementById("input-document").appendChild(inputElement);
 	        inputElement.addEventListener("change", handleFiles, false);
         }
 	    reader.readAsDataURL(e.target.files[0]);
 	}
-	// Bouton delete à finir
-	// function deleteDocument()
-	// {
-	// 	button.addEventListener('click', function (event) 
-	// 	{
-	// 		event.target.parentElement.remove();
-	// 	});
-	// }
 }
+// Bouton delete à finir
+function deleteDocument(event)
+{
+	if (confirm("Etes-vous sûr de vouloir effacer le justificatif ?"))
+	{
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", '/document/' + event.target.value, true);
+		xhr.onreadystatechange = function()
+		{
+		    if (xhr.readyState === 4 && xhr.status === 200){
+				event.target.parentElement.remove();
+		    }
+		}
+		xhr.send();
+	}
+}
+
 </script>
 
 <template>
@@ -127,5 +139,5 @@ window.onload = function()
 	</li>
 </template>
 <template>
-	<input type="file" name="file" accept="image/*">
+	<input type="file" name="file_" accept="image/*">
 </template>

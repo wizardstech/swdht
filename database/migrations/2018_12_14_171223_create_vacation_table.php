@@ -18,8 +18,8 @@ class CreateVacationTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->date('start_date');
             $table->date('return_date');
-            $table->integer('status')->unsigned();
-            $table->integer('type')->unsigned();
+            $table->text('status');
+            $table->text('type');
             $table->timestamps();
         });
     }

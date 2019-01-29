@@ -123,14 +123,19 @@ class ExpenseReportsController extends Controller
   }
 
 
-  // public function delete_document(Request $request)
-  // {
-  //   if(Auth::id() !== $request->id)
-  //   {
-  //       redirect('home');
-  //   }
-  //   $document = Document::where('id','=',$request->id)->delete();
-  //   return "OK" ou HttpResponse
-  // }
+  public function delete_document(Request $request)
+  {
+    if(Auth::id() !== $request->id)
+    {
+        redirect('home');
+    }
+    $document = Document::where('id','=',$request->id)->delete();
+
+    if($document === 1)
+    {
+      return  response('OK', 200)->header('Content-Type', 'text/plain');
+    }
+    return response('Wrong ID', 500)->header('Content-Type', 'text/plain');
+  }
 
 }

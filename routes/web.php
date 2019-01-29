@@ -30,6 +30,8 @@ Route::get('/expense_report/{id}', 'ExpenseReportsController@show')->name('show_
 
 Route::get('/delete_expense_report/{id}', 'ExpenseReportsController@delete')->name('delete_expense_report');
 
+Route::get('/document/{id}', 'ExpenseReportsController@delete_document')->name('delete_document');
+
 Route::get('/new_expense_report', 'ExpenseReportsController@new')->name('new_expense_report');
 
 Route::get('/modify_expense_report/{id}', 'ExpenseReportsController@modify')->name('modify_expense_report');

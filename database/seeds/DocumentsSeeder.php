@@ -27,7 +27,7 @@ class DocumentsSeeder extends Seeder
     	{
     		$documents = new Document;
             $documents->expense_id = $faker->numberBetween($min =1, $max = 100);
-            $documents->document = 'documents/TEST1.jpeg';// Il faut créer une image TEST1.jpeg dans le storage/documents
+            $documents->document = 'documents/TEST1.png';// Il faut créer une image TEST1.jpeg dans le storage/documents
             $documents->document_name = $faker->name();
             $documents->created_at = $faker->dateTime($max = 'now', $timezone = null);
             $documents->updated_at = $faker->dateTime($max = 'now', $timezone = null);

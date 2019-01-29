@@ -25,7 +25,7 @@
                                 <th style="width: 18%" >Date</th>
                                 <th style="width: 20%" >Etablissement</th>
                                 <th style="width: 15%" >Etat</th>
-                                <th style="width: 38%" colspan=3>Actions</th> <!-- recentrer action sur le edit -->
+                                <th style="width: 38%" colspan=3><center>Actions</center></th> <!-- recentrer action sur le edit -->
                             </tr>
                         </thead>
                         <tbody>
