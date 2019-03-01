@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVacationsTable extends Migration
+class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateVacationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vacations', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('type',20);
-            $table->string('status',15);
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->date('date');
 
-            $table->date('start_at');
-            $table->date('end_at');
-
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('owner');
+            $table->foreign('owner')->references('id')->on('users');
 
             $table->softDeletes();
             $table->timestamps();
@@ -37,6 +35,6 @@ class CreateVacationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacations');
+        Schema::dropIfExists('invoices');
     }
 }

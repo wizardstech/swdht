@@ -17,17 +17,17 @@ class CreateCommentsTable extends Migration
 
             $table->increments('id');
             $table->text('content');
-            
+
             $table->unsignedInteger('type');
 
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            
-            $table->unsignedInteger('vacation_id')->nullable();
-            $table->foreign('vacation_id')->references('id')->on('vacations');            
 
-            $table->unsignedInteger('expense_id')->nullable();
-            $table->foreign('expense_id')->references('id')->on('expenses');
+            $table->unsignedInteger('absence_id')->nullable();
+            $table->foreign('absence_id')->references('id')->on('absences');
+
+            $table->unsignedInteger('invoice_id')->nullable();
+            $table->foreign('invoice_id')->references('id')->on('invoices');
 
             $table->softDeletes();
             $table->timestamps();

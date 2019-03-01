@@ -31,7 +31,7 @@
           </a>
         </div>
       </div>
-      <a class="navbar-item">
+      <a class="navbar-item" href="{{ route('invoices.index') }}">
         {{ __('app.expense') }}
       </a>
       <a class="navbar-item">
@@ -59,7 +59,7 @@
               </a>
               @empty
               <p> No notifications </p>
-              @endforelse              
+              @endforelse
             </div>
           </div>
           <div class="navbar-item has-dropdown is-hoverable">
@@ -69,7 +69,7 @@
             <div class="navbar-dropdown dropdown-right">
               <a class="navbar-item" href="{{ route('profile',['username' => Auth::user()->username]) }}">
                 {{ __('app.profile') }}
-              </a>              
+              </a>
               <a class="navbar-item" href="{{ route('logout') }}">
                 {{ __('auth.logout') }}
               </a>

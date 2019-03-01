@@ -4,6 +4,8 @@
 // Bulma
 @import './node_modules/bulma/bulma.sass';
 
+@import '../../node_modules/bulma-calendar/dist/css/bulma-calendar.min.css';
+
 // Overide bulma
 @import './custom.scss';
 

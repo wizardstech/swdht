@@ -20,6 +20,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "bulma": "^0.7.2"
+        "bulma": "^0.7.2",
+        "bulma-calendar": "^6.0.1"
     }
 }

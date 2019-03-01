@@ -13,8 +13,8 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 class User extends Authenticatable implements HasMedia
 {
-	use SoftDeletes; 
-	use Notifiable; 
+	use SoftDeletes;
+	use Notifiable;
 	use HasRoles;
 	use HasMediaTrait;
 
@@ -38,5 +38,15 @@ class User extends Authenticatable implements HasMedia
 		'password',
 		'remember_token'
 	];
+
+	public function invoices()
+	{
+		return $this->hasMany(\App\Invoice::class, 'invoice', 'id');
+	}
+
+	public function absences()
+	{
+		return $this->hasMany(\App\Absence::class, 'absence', 'id');
+	}
 
 }
