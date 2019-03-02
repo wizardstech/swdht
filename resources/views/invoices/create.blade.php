@@ -5,24 +5,45 @@
     <div class="card">
       <div class="card-content">
         <p class="title">
-            New invoice
+            {{ __('app.new_invoice') }}
         </p>
-        {!! Form::open(['route' => 'invoices.store']) !!}
-
+        {!! Form::open(['route' => 'invoices.store', 'files'=>true]) !!}
+          <div class="field">
+            <label class="label">{{ __('fields.title') }}</label>
             {{ Form::text('title', null, [
               'class' => 'input',
               'placeholder' => 'Invoice title',
               'required' =>  'required'
               ]) }}
+          </div>
+          <div class="field">
+            <label class="label">Description</label>
             {{ Form::textarea('description', null, [
               'class' => 'textarea',
               'placeholder' => 'Description and informations',
               'required' =>  'required'
               ]) }}
+          </div>
+          <div class="field">
+            <label class="label">{{ __('fields.amount') }}</label>
+            {{ Form::text('amount', null, [
+              'class' => 'input',
+              'placeholder' => 'Amount',
+              'required' =>  'required'
+              ]) }}
+          </div>
+          <div class="field">
+            <label class="label">Date</label>
             {{ Form::date('date', null, [
+              'class' => 'input',
               'id' => 'datepicker',
               'required' =>  'required'
               ]) }}
+          </div>
+          <div class="field">
+            <label class="label">Facture</label>
+            {{ Form::file('document') }}
+          </div>
             {{ Form::submit('Save !', ['class' => 'button']) }}
         {!! Form::close() !!}
     </div>

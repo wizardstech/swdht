@@ -20,6 +20,10 @@ class CreateInvoicesTable extends Migration
             $table->text('description')->nullable();
             $table->date('date');
 
+            $table->decimal('amount');
+
+            $table->enum('status', ['pending', 'validated', 'denied']);
+
             $table->unsignedInteger('owner');
             $table->foreign('owner')->references('id')->on('users');
 

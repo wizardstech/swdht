@@ -20,4 +20,10 @@ return [
     'register' => 'Register',
     'forgotPassword' => 'Forgot your password ?',
     'username' => 'Username',
+    'title' => 'Title',
+    'amount' => 'Amount',
+    'files' => 'Files',
+    'download' => 'Download',
+    'validate' => 'Validate',
+    'status' => 'Status',
 ];

@@ -1,7 +1,7 @@
 <nav class="navbar is-light" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="{{ route('home') }}">
-      <img src="{{ asset('wizards.png') }}">
+      <img src="{{ asset('logo.png') }}">
     </a>
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -17,32 +17,32 @@
       </a>
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
-          {{ __('app.vacations') }}
+          {{ __('app.absences') }}
         </a>
         <div class="navbar-dropdown">
           <a class="navbar-item">
-            {{ __('app.vacations') }}
+            {{ __('app.myAbsences') }}
           </a>
           <a class="navbar-item">
-            {{ __('app.requestVacation') }}
+            {{ __('app.submitAbsence') }}
           </a>
           <a class="navbar-item">
-            {{ __('app.pendingVacation') }}
+            {{ __('app.pendingAbsence') }}
           </a>
         </div>
       </div>
       <a class="navbar-item" href="{{ route('invoices.index') }}">
-        {{ __('app.expense') }}
+        {{ __('app.invoice') }}
       </a>
-      <a class="navbar-item">
-        {{ __("app.wallOfSalt") }}
+      <a class="navbar-item" href="{{ route('invoices.index') }}">
+        {{ __('app.ideas') }}
       </a>
     </div>
     @endauth
     <div class="navbar-end">
+          @guest
       <div class="navbar-item">
         <div class="buttons">
-          @guest
           <a class="button is-primary" href="{{ route('login') }}">{{ __('fields.login') }}</a>
           @if (Route::has('register'))
           <a class="button is-light" href="{{ route('register') }}">{{ __('fields.register') }}</a>
@@ -50,16 +50,14 @@
           @else
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-item navbar-link">
-              Notifications
+              <i class="material-icons">notifications</i>
+              @if(!\Auth::user()->unreadNotifications->isEmpty())
+              <span class="notifications-count">{{ \Auth::user()->unreadNotifications->count() }}</span>
+              @endif
             </a>
             <div class="navbar-dropdown dropdown-right">
-              @forelse(Auth::user()->notifications as $notification)
-              <a class="navbar-item" >
-                {{ $notification }}
-              </a>
-              @empty
-              <p> No notifications </p>
-              @endforelse
+              @each('parts.notifications', Auth::user()->unreadNotifications, 'notification', 'parts.notifications_empty')
+              <a class="navbar-item" href="{{ route('notifications_index') }}"> See all notifications </a>
             </div>
           </div>
           <div class="navbar-item has-dropdown is-hoverable">

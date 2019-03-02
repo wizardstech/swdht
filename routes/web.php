@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Invoice
     Route::resource('/invoices', 'InvoiceController');
+    Route::get('/invoice/{id}/setStatus', 'InvoiceController@setStatus')->name('invoice_status');
 
     // Absence
     Route::resource('/absences', 'AbsenceController');
@@ -29,6 +30,10 @@ Route::group(['middleware' => 'auth'], function () {
     // Profile
     Route::get('/profile/{username}', 'UserController@profile')->name('profile');
     Route::get('/profile/edit', 'UserController@editProfile')->name('profile_edit');
+
+    Route::get('/notifications', 'UserController@indexNotifications')->name('notifications_index');
+
+    Route::get('/download/{id}', 'DownloadMediaController@downloadInvoice')->name('download_invoice');
 
 });
 

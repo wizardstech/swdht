@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\NewInvoice;
+use App\Invoice;
 
 class HomeController extends Controller
 {
-    
+
     /**
      * Show the application dashboard.
      *
@@ -14,6 +16,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+      dd(\Auth::user()->notifications->count());
+
+      foreach (\Auth::user()->notifications as $notification) {
+          dd($notification);
+      }
+
+      return view('home');
     }
 }

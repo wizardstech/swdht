@@ -13,3 +13,25 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.invoice-img img {
+  width: auto;
+  height: 300px;
+  object-fit: cover;
+  object-position: 20% 30%;
+}
+
+.notifications-count{
+    background-color: #dc0404;
+    border-radius: 50px;
+    width: 23px;
+    height: 23px;
+    line-height: 23px;
+    text-align: center;
+    color: #FFF;
+    font-size: 13px;
+    font-weight: bold;
+    top: 0px;
+    left: -8px;
+    position: relative;
+}

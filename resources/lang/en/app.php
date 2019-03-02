@@ -13,13 +13,28 @@ return [
     |
     */
     'home' => 'Home',
-    'expense' => 'Expense Reports',
-    'myExpenses' => 'My Expense Reports',
-    'vacations' => 'Vacations',
-    'myVacations' => 'My vacations',
-    'requestVacation' => 'Request a vacation',
-    'pendingVacation' => 'Pending vacations',
-    'wallOfSalt' => 'Wall of Salt',
+    'invoice' => 'Expense Reports',
+    'myInvoices' => 'My Expense Reports',
+    'add_new_invoice' => 'Add a new invoice',
+    'new_invoice' => 'New invoice',
+    'no_invoice' => 'You have no invoice at this moment',
+    'new_invoice_flash' => 'New invoice successfully added !',
+    'validate_invoice' => 'Validate this invoice',
+    'denied_invoice' => 'Deny this invoice',
+    'invoice_status_change' => 'Invoice status successfully changed',
+
+    'absence' => 'Vacations',
+    'myAbsences' => 'My vacations',
+    'submitAbsence' => 'Request a vacation',
+    'pendingAbsence' => 'Pending vacations',
+
+    'applicant' => 'Applicant',
+
     'profile' => 'Profile',
+    'pending' => 'Pending',
+    'denied' => 'Denied',
+    'validated' => 'Validated',
+    'show' => 'Show',
+    'ideas' => 'Idea box'
 
 ];

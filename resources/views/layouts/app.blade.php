@@ -11,6 +11,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   </head>
@@ -18,6 +19,12 @@
     @include('layouts.navbar')
     @yield('breadcrumb')
     <div class="container mt-50">
+      @if(session()->get('message.body'))
+          <div class="notification is-{{ session()->get('message.status') }}">
+             <button class="delete" id="remove-flash"></button>
+             {{ session()->get('message.body') }}
+          </div>
+      @endif
       @yield('content')
     </div>
   </body>

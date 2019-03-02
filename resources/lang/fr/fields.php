@@ -20,4 +20,11 @@ return [
     'register' => 'S\'inscrire',
     'forgotPassword' => 'Mot de passe oublié ?',
     'username' => 'Nom d\'utilisateur',
+    'title' => 'Titre',
+    'amount' => 'Montant',
+    'files' => 'Fichiers',
+    'download' => 'Télécharger',
+    'validate' => 'Valider',
+    'status' => 'Statut',
+
 ];

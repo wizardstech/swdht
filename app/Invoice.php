@@ -3,9 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 
-class Invoice extends Model
+class Invoice extends Model implements HasMedia
 {
+  use SoftDeletes;
+  use HasMediaTrait;
+
+  const STATUS = [
+    'validated',
+    'denied',
+    'pending'
+  ];
+
   protected $casts = [
     'owner' => 'int'
   ];
@@ -24,6 +36,6 @@ class Invoice extends Model
 
   public function user()
   {
-        return $this->belongsTo(\App\User::class, 'owner');
+      return $this->belongsTo(\App\User::class, 'owner');
   }
 }

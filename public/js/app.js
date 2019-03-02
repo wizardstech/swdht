@@ -88,6 +88,18 @@ var calendars = __WEBPACK_IMPORTED_MODULE_0__node_modules_bulma_calendar_dist_js
 
 var element = document.querySelector('#datepicker');
 
+document.addEventListener('click', function (event) {
+
+  // If the clicked element doesn't have the right selector, bail
+  if (!event.target.matches('#remove-flash')) return;
+
+  // Don't follow the link
+  event.preventDefault();
+
+  // Log the clicked element in the console
+  event.target.parentNode.style.display = 'none';;
+}, false);
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {

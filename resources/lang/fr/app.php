@@ -13,13 +13,29 @@ return [
     |
     */
     'home' => 'Accueil',
-    'expense' => 'Notes de frais',
-    'myExpenses' => 'Mes notes de frais',
-    'vacations' => 'Congés',
-    'myVacations' => 'Mes congés',
-    'requestVacation' => 'Demander un congé',
-    'pendingVacation' => 'Congés en attente',
-    'wallOfSalt' => 'Mur du sel',
+    'invoice' => 'Notes de frais',
+    'myInvoices' => 'Mes notes de frais',
+    'add_new_invoice' => 'Ajouter un note de frais',
+    'new_invoice' => 'Nouvelle note de frais',
+    'no_invoice' => 'Vous n\'avez aucune note de frais',
+    'new_invoice_flash' => 'La note de frais a bien été ajoutée',
+    'validate_invoice' => 'Valider la note de frais',
+    'denied_invoice' => 'Refuser la note de frais',
+    'invoice_status_change' => 'Statut de la note de frais correctement modifié',
+
+
+    'absences' => 'Absences et congés',
+    'myAbsences' => 'Mes absences',
+    'submitAbsence' => 'Demande un congé',
+    'pendingAbsence' => 'Congés en attentes',
+
+    'applicant' => 'Demandeur',
+
     'profile' => 'Profil',
+    'pending' => 'En attente',
+    'denied' => 'Refusé',
+    'validated' => 'Validé',
+    'show' => 'Voir',
+    'ideas' => 'Boîte à idées'
 
 ];

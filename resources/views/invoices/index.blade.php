@@ -2,39 +2,56 @@
 
 @section('content')
 <div class="container">
-    <div class="card">
-      <div class="card-content">
-        <div class="columns">
+  <div class="card">
+    <div class="card-content">
+      <div class="columns">
         <p class="title column is-four-fifths">
-            Invoices
+          {{ __('app.invoice') }}
         </p>
-        <a href="{{ route('invoices.create') }}" class="button"> Add new invoice </a>
-        </div>
+        <a href="{{ route('invoices.create') }}" class="button">{{ __('app.add_new_invoice')}}</a>
+      </div>
 
-        <table class="table is-hoverable is-fullwidth">
-             <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse($invoices as $invoice)
-                <tr>
-                    <td>{{ $invoice->title }}</td>
-                    <td>{{ $invoice->title }}</td>
-                    <td>{{ $invoice->title }}</td>
-                    <td><a class="button" href="{{ route('invoices.show', ['id' => $invoice->id]) }}">View</a></td>
-                </tr>
-                @empty
-                <tr><td>You have no invoice at this moment</td></tr>
-                @endforelse
-              </tbody>
-        </table>
-        {{ $invoices->links() }}
-    </div>
+      <table class="table is-hoverable is-fullwidth">
+       <thead>
+        <tr>
+          <th>{{ __('fields.title') }}</th>
+          <th>Date</th>
+          <th>{{ __('fields.status') }}</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @forelse($invoices as $invoice)
+        <tr>
+          <td>{{ $invoice->title }}</td>
+          <td>{{ $invoice->date->format('d M y') }}</td>
+          <td>
+            @if( $invoice->status === 'pending')
+            <span class="tag is-warning">{{__('app.pending')}}</span>
+            @elseif( $invoice->status === 'validated')
+            <span class="tag is-success">{{__('app.validated')}}</span>
+            @else
+            <span class="tag is-danger">{{__('app.denied')}}</span>
+            @endif
+          </td>
+          <td>
+            <a class="button" href="{{ route('invoices.show', ['id' => $invoice->id]) }}">
+              {{ __('app.show')}}
+            </a>
+          </td>
+        </tr>
+        @empty
+        <tr>
+          <td>{{ __('app.no_invoice') }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        @endforelse
+      </tbody>
+    </table>
+    {{ $invoices->links() }}
+  </div>
 </div>
 </div>
 @endsection

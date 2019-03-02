@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
+use App\User;
 use Illuminate\Http\Request;
+use App\Notifications\NewInvoice;
 
 class InvoiceController extends Controller
 {
@@ -14,8 +16,13 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::where('owner',\Auth::id())->paginate(10);
-        return view('invoices.index', ['invoices'=>$invoices]);
+        if(\Auth::user()->hasAnyRole(['superadmin','inquisitor'])){
+            $invoices = Invoice::paginate(10);
+        }else{
+            $invoices = Invoice::where('owner', \Auth::id())->paginate(10);
+        }
+
+        return view('invoices.index', compact('invoices'));
     }
 
     /**
@@ -39,15 +46,32 @@ class InvoiceController extends Controller
         $request->validate([
             'title'=>'required',
             'description'=> 'required',
-            'date' => 'date_format:d/m/Y|required'
+            'date' => 'date_format:d/m/Y|required',
+            'amount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'document' => 'required'
         ]);
 
         $invoice = new Invoice;
+
         $invoice->title =$request->get('title');
         $invoice->description = $request->get('description');
         $invoice->owner = \Auth::id();
-        $invoice->date = date_create_from_format('d/m/Y',$request->get('date'));
+        $invoice->date = date_create_from_format('d/m/Y', $request->get('date'));
+        $invoice->amount = $request->get('amount');
+        $invoice->status = 'pending';
         $invoice->save();
+
+        $invoice
+        ->addMediaFromRequest('document')
+        ->withResponsiveImages()
+        ->toMediaCollection('invoice');
+
+        $superadmins = User::getAdmins();
+
+        \Notification::send($superadmins,new NewInvoice($invoice));
+
+        $request->session()->flash('message.status', 'primary');
+        $request->session()->flash('message.body', __('app.new_invoice_flash'));
 
         return redirect()->route('invoices.index')->with('success', 'Invoice has been created');
     }
@@ -60,12 +84,19 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        if(\Auth::user()->hasRole('superadmin') || \Auth::id() === $invoice->owner){
-            return view('invoices.show', ['invoice' => $invoice]);
+        if (\Auth::user()->hasAnyRole(['superadmin','inquisitor']) || \Auth::id() === $invoice->owner) {
+
+            $fileType = $invoice->getFirstMedia('invoice')->mime_type;
+            $download = true;
+
+            if($fileType === 'image/jpeg' || $fileType === 'image/png'){
+                $download = false;
+            }
+
+            return view('invoices.show', compact('invoice','download'));
         }
 
         return redirect()->route('invoices.index');
-
     }
 
     /**
@@ -100,5 +131,27 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+    public function setStatus(Request $request, $id){
+
+        $invoice = Invoice::whereId($id)->firstOrFail();
+
+        if(!\Auth::user()->hasAnyRole(['superadmin','inquisitor'])){
+            return redirect()->route('invoices.show', ['id' => $invoice->id]);
+        }
+
+        $status = $request->input('status');
+
+        if(in_array($status, Invoice::STATUS)){
+            $invoice->status = $status;
+            $invoice->save();
+
+            $request->session()->flash('message.status', 'primary');
+            $request->session()->flash('message.body', __('app.invoice_status_change'));
+
+        }
+
+        return redirect()->route('invoices.show', ['id' => $invoice->id]);
     }
 }
