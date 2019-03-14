@@ -37,6 +37,9 @@
       <a class="navbar-item" href="{{ route('invoices.index') }}">
         {{ __('app.ideas') }}
       </a>
+      <a class="navbar-item" href="{{ route('invoices.index') }}">
+        {{ __('app.docs') }}
+      </a>
     </div>
     @endauth
     <div class="navbar-end">

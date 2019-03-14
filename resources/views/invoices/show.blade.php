@@ -7,6 +7,9 @@
       <p class="title">
         {{ $invoice->title }}
       </p>
+      @if( $invoice->status === 'pending' || Auth::user()->hasAnyRole(['inquisitor','superadmin']))
+      <a class="button" id="delete-modal"> Delete </a>
+      @endif
       @hasanyrole('inquisitor|superadmin')
       <p class="label"> {{ __('app.applicant') }} :</p>
       {{ $invoice->user->fullname }}
@@ -30,8 +33,8 @@
       </a>
       @else
       <div class="invoice-img">
-        <a href="{{ $invoice->getFirstMedia('invoice')->getFullUrl() }}">
-          {{ $invoice->getFirstMedia('invoice') }}
+        <a href="{{ url('medias/'.$invoice->getFirstMedia('invoice')->id) }}">
+          <img src="{{ url('medias/'.$invoice->getFirstMedia('invoice')->id) }}">
         </a>
         <br>
         <a class="button" href="{{ route('download_invoice', ['id'=>$invoice->id]) }}">
@@ -45,5 +48,10 @@
       @endhasanyrole
     </div>
   </div>
+  @include('parts.modal_delete', [
+    'delete_route' => route('invoices.destroy', ['id' => $invoice->id]),
+    'modal_message' => 'Are you sure to delete this invoice ?',
+    'modal_title' => 'Delete an invoice'
+    ])
 </div>
 @endsection

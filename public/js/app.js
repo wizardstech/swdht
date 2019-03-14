@@ -100,6 +100,26 @@ document.addEventListener('click', function (event) {
   event.target.parentNode.style.display = 'none';;
 }, false);
 
+document.querySelector('a#delete-modal').addEventListener('click', function (event) {
+  event.preventDefault();
+  var modal = document.querySelector('.modal'); // assuming you have only 1
+  var html = document.querySelector('html');
+  modal.classList.add('is-active');
+  html.classList.add('is-clipped');
+
+  modal.querySelector('.modal-background').addEventListener('click', function (e) {
+    e.preventDefault();
+    modal.classList.remove('is-active');
+    html.classList.remove('is-clipped');
+  });
+
+  modal.querySelector('.modal-cancel').addEventListener('click', function (e) {
+    e.preventDefault();
+    modal.classList.remove('is-active');
+    html.classList.remove('is-clipped');
+  });
+});
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {

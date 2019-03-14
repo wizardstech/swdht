@@ -12,10 +12,25 @@ class DownloadMediaController
    {
       $invoice = Invoice::whereId($id)->firstOrFail();
 
-      if((\Auth::id() === $invoice->owner) || \Auth::id()->hasRole('superadmin')) {
+      if((\Auth::id() === $invoice->owner) || \Auth::user()->hasAnyRole(['inquisitor','superadmin'])) {
         return response()->download($invoice->getFirstMedia('invoice')->getPath());
       }
-
-
    }
+
+    public function getInvoiceImage($id) {
+
+      $media = Media::whereId($id)->firstOrFail();
+      $invoice = Invoice::whereId($media->model_id)->firstOrFail();
+
+      if((\Auth::id() === $invoice->owner) || \Auth::user()->hasAnyRole(['inquisitor','superadmin'])) {
+        $path = $media->getPath();
+        $type = "image/jpeg";
+        header('Content-Type:'.$type);
+        header('Content-Length: ' . filesize($path));
+        readfile($path);
+      }
+
+    }
+
+
 }

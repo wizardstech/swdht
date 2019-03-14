@@ -130,7 +130,8 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
+         $invoice->delete();
+         return redirect()->route('invoices.index')->with('success', 'Stock has been deleted Successfully');
     }
 
     public function setStatus(Request $request, $id){

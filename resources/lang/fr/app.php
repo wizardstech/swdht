@@ -23,6 +23,7 @@ return [
     'denied_invoice' => 'Refuser la note de frais',
     'invoice_status_change' => 'Statut de la note de frais correctement modifié',
 
+    'docs' => 'Documents',
 
     'absences' => 'Absences et congés',
     'myAbsences' => 'Mes absences',

@@ -17,12 +17,6 @@ class HomeController extends Controller
     public function index()
     {
 
-      dd(\Auth::user()->notifications->count());
-
-      foreach (\Auth::user()->notifications as $notification) {
-          dd($notification);
-      }
-
       return view('home');
     }
 }

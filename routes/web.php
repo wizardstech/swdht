@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications', 'UserController@indexNotifications')->name('notifications_index');
 
     Route::get('/download/{id}', 'DownloadMediaController@downloadInvoice')->name('download_invoice');
+    Route::get('/medias/{id}', 'DownloadMediaController@getInvoiceImage')->name('get_private_image');
 
 });
 

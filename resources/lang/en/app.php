@@ -23,6 +23,8 @@ return [
     'denied_invoice' => 'Deny this invoice',
     'invoice_status_change' => 'Invoice status successfully changed',
 
+    'docs' => 'Documents',
+
     'absence' => 'Vacations',
     'myAbsences' => 'My vacations',
     'submitAbsence' => 'Request a vacation',
