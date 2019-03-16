@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Invoice;
 use App\User;
 use Illuminate\Http\Request;
-use App\Notifications\NewInvoice;
+use App\Notifications\NewInvoice as NewInvoiceDB;
+use App\Mail\NewInvoice as NewInvoiceMail;
+
 
 class InvoiceController extends Controller
 {
@@ -68,12 +70,15 @@ class InvoiceController extends Controller
 
         $superadmins = User::getAdmins();
 
-        \Notification::send($superadmins,new NewInvoice($invoice));
+        $message = \Auth::user()->fullname.' added a new invoice';
+
+        \Notification::send($superadmins,new NewInvoiceDB($invoice, $message));
+        \Mail::to($superadmins)->send(new NewInvoiceMail($invoice, \Auth::user()));
 
         $request->session()->flash('message.status', 'primary');
         $request->session()->flash('message.body', __('app.new_invoice_flash'));
 
-        return redirect()->route('invoices.index')->with('success', 'Invoice has been created');
+        return redirect()->route('invoices.index');
     }
 
     /**
@@ -128,10 +133,14 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(Request $request, Invoice $invoice)
     {
-         $invoice->delete();
-         return redirect()->route('invoices.index')->with('success', 'Stock has been deleted Successfully');
+        $invoice->delete();
+
+        $request->session()->flash('message.status', 'danger');
+        $request->session()->flash('message.body', __('app.delete_invoice_flash'));
+
+         return redirect()->route('invoices.index');
     }
 
     public function setStatus(Request $request, $id){

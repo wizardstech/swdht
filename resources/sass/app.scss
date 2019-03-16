@@ -35,3 +35,10 @@
     left: -8px;
     position: relative;
 }
+
+@include desktop {
+  .navbar-end .dropdown-notification .navbar-dropdown {
+    left: -200px;
+  }
+}
+

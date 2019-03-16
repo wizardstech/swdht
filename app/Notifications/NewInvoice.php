@@ -19,9 +19,10 @@ class NewInvoice extends Notification
      *
      * @return void
      */
-    public function __construct(Invoice $invoice)
+    public function __construct(Invoice $invoice, $message)
     {
         $this->invoice = $invoice;
+        $this->message = $message;
     }
 
     /**
@@ -58,8 +59,9 @@ class NewInvoice extends Notification
     public function toArray($notifiable)
     {
         return [
-            'invoice_id' => $this->invoice->id,
-            'owner' => $this->invoice->owner
+            'target_id' => $this->invoice->id,
+            'link' => route('invoices.show', ['id' => $this->invoice->id]),
+            'message' => $this->message
         ];
     }
 }

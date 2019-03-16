@@ -22,6 +22,7 @@ return [
     'validate_invoice' => 'Valider la note de frais',
     'denied_invoice' => 'Refuser la note de frais',
     'invoice_status_change' => 'Statut de la note de frais correctement modifié',
+    'delete_invoice_flash' => 'Note de frais supprimée avec succès !',
 
     'docs' => 'Documents',
 

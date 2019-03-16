@@ -17,6 +17,9 @@ class HomeController extends Controller
     public function index()
     {
 
-      return view('home');
+
+      $chuck = json_decode(file_get_contents('https://api.chucknorris.io/jokes/random'), true);
+
+      return view('home', compact('chuck'));
     }
 }

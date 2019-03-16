@@ -11373,3 +11373,9 @@ label.panel-block:hover {
   left: -8px;
   position: relative;
 }
+
+@media screen and (min-width: 1088px) {
+  .navbar-end .dropdown-notification .navbar-dropdown {
+    left: -200px;
+  }
+}

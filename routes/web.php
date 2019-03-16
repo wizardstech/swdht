@@ -15,7 +15,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name(
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'notification']], function () {
 
     // Invoice
     Route::resource('/invoices', 'InvoiceController');
@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile/edit', 'UserController@editProfile')->name('profile_edit');
 
     Route::get('/notifications', 'UserController@indexNotifications')->name('notifications_index');
+    Route::get('/notifications/read-all', 'UserController@markAllRead')->name('notifications_read_all');
 
     Route::get('/download/{id}', 'DownloadMediaController@downloadInvoice')->name('download_invoice');
     Route::get('/medias/{id}', 'DownloadMediaController@getInvoiceImage')->name('get_private_image');

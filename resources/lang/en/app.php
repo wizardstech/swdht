@@ -22,6 +22,7 @@ return [
     'validate_invoice' => 'Validate this invoice',
     'denied_invoice' => 'Deny this invoice',
     'invoice_status_change' => 'Invoice status successfully changed',
+    'delete_invoice_flash' => 'Invoice successfully deleted !',
 
     'docs' => 'Documents',
 

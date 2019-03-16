@@ -51,7 +51,7 @@
           <a class="button is-light" href="{{ route('register') }}">{{ __('fields.register') }}</a>
           @endif
           @else
-          <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-item has-dropdown dropdown-notification is-hoverable">
             <a class="navbar-item navbar-link">
               <i class="material-icons">notifications</i>
               @if(!\Auth::user()->unreadNotifications->isEmpty())
@@ -59,8 +59,10 @@
               @endif
             </a>
             <div class="navbar-dropdown dropdown-right">
-              @each('parts.notifications', Auth::user()->unreadNotifications, 'notification', 'parts.notifications_empty')
+              @each('parts.notifications', Auth::user()->notifications, 'notification', 'parts.notifications_empty')
+              <hr class="dropdown-divider">
               <a class="navbar-item" href="{{ route('notifications_index') }}"> See all notifications </a>
+              <a class="navbar-item" href="{{ route('notifications_read_all') }}"> Mark all notifications as read </a>
             </div>
           </div>
           <div class="navbar-item has-dropdown is-hoverable">

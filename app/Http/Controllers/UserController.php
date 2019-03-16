@@ -22,4 +22,9 @@ class UserController extends Controller
     public function indexNotifications(Request $request){
         return "Notifcations index";
     }
+
+    public function markAllRead(){
+      \Auth::user()->unreadNotifications()->update(['read_at' => now()]);
+      return redirect()->back();
+    }
 }
