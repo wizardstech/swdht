@@ -7,9 +7,9 @@
       <p class="title">
         {{ $invoice->title }}
       </p>
-      @if( $invoice->status === 'pending' || Auth::user()->hasAnyRole(['inquisitor','superadmin']))
-      <a class="button" id="delete-modal"> Delete </a>
-      @endif
+      <a class="button m-bottom" href="{{ route('invoices.index') }}">
+        <i class="material-icons">keyboard_backspace</i>Go back
+      </a>
       @hasanyrole('inquisitor|superadmin')
       <p class="label"> {{ __('app.applicant') }} :</p>
       {{ $invoice->user->fullname }}
@@ -42,10 +42,15 @@
         </a>
       </div>
       @endif
+      <div class="has-text-centered m-top">
       @hasanyrole('inquisitor|superadmin')
-      <a href="{{ route('invoice_status', ['id' => $invoice->id, 'status' => 'validated' ])}}" class="button is-primary"> {{ __('app.validate_invoice') }} </a>
+      <a href="{{ route('invoice_status', ['id' => $invoice->id, 'status' => 'validated' ])}}" class="button is-success"> {{ __('app.validate_invoice') }} </a>
       <a href="{{ route('invoice_status', ['id' => $invoice, 'status' => 'denied' ])}}" class="button is-danger"> {{ __('app.denied_invoice') }} </a>
       @endhasanyrole
+      @if( $invoice->status === 'pending' || Auth::user()->hasAnyRole(['inquisitor','superadmin']))
+      <a class="button is-danger" id="delete-modal"> Delete </a>
+      @endif
+      </div>
     </div>
   </div>
   @include('parts.modal_delete', [

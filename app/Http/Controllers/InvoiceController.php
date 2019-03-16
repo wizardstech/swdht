@@ -16,13 +16,17 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        if(\Auth::user()->hasAnyRole(['superadmin','inquisitor'])){
-            $invoices = Invoice::paginate(10);
-        }else{
-            $invoices = Invoice::where('owner', \Auth::id())->paginate(10);
-        }
+
+        $filter = $request->input('filter');
+        $userIsAdmin = \Auth::user()->hasAnyRole(['superadmin','inquisitor']);
+
+        $invoices = Invoice::when($filter, function($query, $filter){
+            return $query->where('status', $filter);
+        })->when(!$userIsAdmin, function($query, $userIsAdmin){
+            return $query->where('owner', \Auth::id());
+        })->paginate(10);
 
         return view('invoices.index', compact('invoices'));
     }

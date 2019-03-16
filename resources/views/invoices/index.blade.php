@@ -10,7 +10,23 @@
         </p>
         <a href="{{ route('invoices.create') }}" class="button">{{ __('app.add_new_invoice')}}</a>
       </div>
-
+    <div class="field is-grouped column has-text-centered">
+      <p class="control">
+        <a class="button" href="{{ route('invoices.index') }}">
+          All invoices
+        </a>
+      </p>
+      <p class="control">
+        <a class="button is-warning" href="{{ route('invoices.index', ['filter' => 'pending']) }}">
+          Pending Invoices
+        </a>
+      </p>
+      <p class="control">
+        <a class="button is-danger" href="{{ route('invoices.index', ['filter' => 'denied']) }}">
+          Denied Invoices
+        </a>
+      </p>
+    </div>
       <table class="table is-hoverable is-fullwidth">
        <thead>
         <tr>

@@ -7,6 +7,9 @@
         <p class="title">
             {{ __('app.new_invoice') }}
         </p>
+        <a class="button m-bottom" href="{{ route('invoices.index') }}">
+          <i class="material-icons">keyboard_backspace</i>Go back
+        </a>
         {!! Form::open(['route' => 'invoices.store', 'files'=>true]) !!}
           <div class="field">
             <label class="label">{{ __('fields.title') }}</label>

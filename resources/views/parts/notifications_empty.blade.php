@@ -1,1 +1,1 @@
-<span class="navbar-item">No notification</span>
+<span class="navbar-item">No unread notification</span>
